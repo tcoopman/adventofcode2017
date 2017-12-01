@@ -1,0 +1,10 @@
+lib: [
+  "_build/install/default/lib/esy-ocaml-project/META" {"META"}
+  "_build/install/default/lib/esy-ocaml-project/opam" {"opam"}
+]
+bin: [
+  "_build/install/default/bin/tests" {"tests"}
+]
+doc: [
+  "_build/install/default/doc/esy-ocaml-project/README.md"
+]
