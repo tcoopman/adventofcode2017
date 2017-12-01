@@ -33,7 +33,7 @@ using:
 
 And test compiled executable:
 
-    % esy ./_build/default/bin/hello.exe
+    % esy build && ./_build/default/tests/tests.exe 
 
 Shell into environment:
 
