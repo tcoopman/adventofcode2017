@@ -141,6 +141,23 @@
   peerDependencies:
     ocaml "*"
 
+"@opam/containers@^1.4.0":
+  version "1.4.0"
+  uid f2633c34f63c49c7c806e9e8856c7cb4
+  resolved "@opam/containers@1.4.0-f2633c34f63c49c7c806e9e8856c7cb4.tgz"
+  dependencies:
+    "@esy-ocaml/esy-installer" "^0.0.0"
+    "@esy-ocaml/substs" "^0.0.1"
+    "@opam/base-bytes" "*"
+    "@opam/base-threads" "*"
+    "@opam/base-unix" "*"
+    "@opam/cppo" "*"
+    "@opam/ocamlbuild" "*"
+    "@opam/ocamlfind" "*"
+    "@opam/result" "*"
+  peerDependencies:
+    ocaml " >= 4.1.0"
+
 "@opam/cppo@ >= 1.1.0", "@opam/cppo@*":
   version "1.6.0"
   uid "91cb34e38dc34b0c630d1917f216a522"
