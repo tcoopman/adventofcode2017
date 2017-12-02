@@ -1,4 +1,4 @@
-open Lib.Captcha
+open Lib.Day1
 
 let test_parse_input () =
   Alcotest.(check (option (list int))) "1122 to [1;1;2;2]" (parse_input "1122") (Some [1;1;2;2])
@@ -58,11 +58,4 @@ let test_set_star2 = [
   "Sum Captcha", `Quick, test_sum_captcha_star2_4;
   "Sum Captcha", `Quick, test_sum_captcha_star2_5;
   "Result", `Quick, test_input_2;
-]
-
-(* Run it *)
-let () =
-  Alcotest.run "Day 1" [
-    "Star 1", test_set_star1;
-    "Star 2", test_set_star2;
 ]
