@@ -1,6 +1,6 @@
 (jbuild_version 1)
 
 (executable
- ((name main)
+ ((name tests)
   (public_name tests)
   (libraries (lib alcotest))))
