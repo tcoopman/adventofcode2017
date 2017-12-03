@@ -22,3 +22,19 @@ let test_set_star1 = [
   "Find square", `Quick, test_find_square;
   "Manhattan distance", `Quick, test_manhattan_distance;
 ]
+
+
+let test_postion_next () =
+    Alcotest.(check bool) "" ((Position.next (0,0,0)) = (1,0,1)) true;
+    Alcotest.(check bool) "" ((Position.next (2,-2,2)) = (1,-2,2)) true;
+    Alcotest.(check bool) "" ((Position.next (-1,0,1)) = (-1,1,1)) true;
+    Alcotest.(check bool) "" ((Position.next (0,1,1)) = (1,1,1)) true;
+    Alcotest.(check bool) "" ((Position.next (1,0,1)) = (1,-1,1)) true
+let test_find_larger () =
+    Alcotest.(check int) "1" (find_first_larger 1) 2;
+    Alcotest.(check int) "361527" (find_first_larger 361527) 363010
+
+let test_set_star2 = [
+  "Find position next", `Quick, test_postion_next;
+  "Find first larger", `Quick, test_find_larger;
+]

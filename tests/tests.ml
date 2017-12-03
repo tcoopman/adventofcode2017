@@ -5,4 +5,5 @@ let () =
     "Star 3", Day2.test_set_star1;
     "Star 4", Day2.test_set_star2;
     "Star 5", Day3.test_set_star1;
+    "Star 6", Day3.test_set_star2;
 ]
