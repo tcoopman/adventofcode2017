@@ -76,6 +76,9 @@ let test_set_star1 = [
   "Parse Input", `Quick, test_parse_input;
   "Spreadsheet", `Quick, test_spreadsheet;
   "Input", `Quick, test_input_1;
+]
+
+let test_set_star2 = [
   "Spreadsheet2", `Quick, test_spreadsheet_2;
   "Input2", `Quick, test_input_2;
 ]
