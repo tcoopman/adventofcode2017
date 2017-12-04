@@ -1,13 +1,6 @@
 open Lib.Day4
 
-let test_is_valid_passphrase () =
-    Alcotest.(check bool) "none" (is_valid_passphrase "") true;
-    Alcotest.(check bool) "aa bb cc dd ee" (is_valid_passphrase "aa bb cc dd ee") true;
-    Alcotest.(check bool) "aa bb cc dd aa" (is_valid_passphrase "aa bb cc dd aa") false
-
-let test_number_valid_passphrases () =
-    Alcotest.(check int) "" (number_valid_passphrases
-"una bokpr ftz ryw nau yknf fguaczl anu
+let day4_input = "una bokpr ftz ryw nau yknf fguaczl anu
 tvay wvco bcoblpt fwzg sfsys zvuqll mcbhwz ovcw fgdy
 ynsocz vid rfmsy essqt fpbjvvq sldje qfpvjvb
 yvh nxc kla vhy vkbq cxfzgr
@@ -518,9 +511,30 @@ xjbyy mxfxa ogvk nqiy qyni ldqwryj niyq jjixc
 uhbul daccgva xtiz dim uhbul yjmakv yjmakv
 huo esajup ouj oju ujo
 eeeu hwvsk jfkmds okhi pogskfm itdlbll
-lpyubo dylpfb iehwug decj ntidy cuygyg lalkb iutu oxgm imn") 0
+lpyubo dylpfb iehwug decj ntidy cuygyg lalkb iutu oxgm imn"
+
+let test_is_valid_passphrase () =
+    Alcotest.(check bool) "none" (is_valid_passphrase "") true;
+    Alcotest.(check bool) "aa bb cc dd ee" (is_valid_passphrase "aa bb cc dd ee") true;
+    Alcotest.(check bool) "aa bb cc dd aa" (is_valid_passphrase "aa bb cc dd aa") false
+
+let test_number_valid_passphrases () =
+    Alcotest.(check int) "" (number_valid_passphrases is_valid_passphrase day4_input) 477
 
 let test_set_star1 = [
   "Valid passphrase", `Quick, test_is_valid_passphrase;
   "Number of valid passphrases", `Quick, test_number_valid_passphrases;
+]
+
+let test_is_valid_passphrase_anagram () =
+    Alcotest.(check bool) "none" (is_valid_passphrase_anagram "") true;
+    Alcotest.(check bool) "abcde fghij" (is_valid_passphrase_anagram "abcde fghij") true;
+    Alcotest.(check bool) "abcde xyz ecdab" (is_valid_passphrase_anagram "abcde xyz ecdab") false
+
+let test_number_valid_passphrases_anagram () =
+    Alcotest.(check int) "" (number_valid_passphrases is_valid_passphrase_anagram day4_input) 167
+
+let test_set_star2 = [
+  "Valid passphrase", `Quick, test_is_valid_passphrase_anagram;
+  "Number of valid passphrases", `Quick, test_number_valid_passphrases_anagram;
 ]
