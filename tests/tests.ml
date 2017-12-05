@@ -8,4 +8,5 @@ let () =
     "Star 6", Day3.test_set_star2;
     "Star 7", Day4.test_set_star1;
     "Star 8", Day4.test_set_star2;
+    "Star 9", Day5.test_set_star1;
 ]
