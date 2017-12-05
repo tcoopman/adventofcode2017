@@ -1,16 +1,13 @@
 open Lib.Day5
-let test_jump_outside_length () =
-    let input =
+
+let test_input =
 "0
 3
 0
 1
 -3"
-    in
-    Alcotest.(check int) "" (jump_outside_length input) 5
 
-let test_input_star_1 () =
-    let input =
+let star_input =
 "1
 0
 0
@@ -1108,10 +1105,24 @@ let test_input_star_1 () =
 -698
 -81
 -682"
-    in 
-    Alcotest.(check int) "" (jump_outside_length input) 387096
+let test_jump_outside_length () =
+    Alcotest.(check int) "" (jump_outside_length test_input) 5
+
+let test_input_star_1 () =
+    Alcotest.(check int) "" (jump_outside_length star_input) 387096
 
 let test_set_star1 = [
   "Jump outside length", `Quick, test_jump_outside_length;
   "Star 1", `Quick, test_input_star_1;
+]
+
+let test_jump_outside_length_2 () =
+    Alcotest.(check int) "" (jump_outside_length_star2 test_input) 10
+
+let test_input_star_2 () =
+    Alcotest.(check int) "" (jump_outside_length_star2 star_input) 28040648
+
+let test_set_star2 = [
+  "Jump outside length", `Quick, test_jump_outside_length_2;
+  "Star 1", `Quick, test_input_star_2;
 ]
