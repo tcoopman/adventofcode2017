@@ -19,7 +19,7 @@ module IntList = struct
 
     let compare = compare
 end
-module ListSet = Set.Make(IntList)
+module ListMap = Map.Make(IntList)
 
 
 let do_distribute input =
@@ -30,12 +30,12 @@ let do_distribute input =
 
 let memory_allocation input = 
     let rec find_redistribution_cycles found count input =
-        match ListSet.mem input found with
-        | true -> count
-        | false ->
+        match ListMap.find_opt input found with
+        | Some i -> (count, count - i)
+        | None ->
             let new_memory = do_distribute input in
-            find_redistribution_cycles (ListSet.add input found) (count + 1) new_memory
+            find_redistribution_cycles (ListMap.add input count found) (count + 1) new_memory
     in
     match whitespace_to_int input with
-    | None -> min_int
-    | Some l -> find_redistribution_cycles ListSet.empty 0 l
+    | None -> (min_int, min_int)
+    | Some l -> find_redistribution_cycles ListMap.empty 0 l
