@@ -1150,4 +1150,11 @@ let test_set_star1 = [
   "Bottom of tower", `Quick, test_bottom_of_tower;
 ]
 
-let test_set_star2 = []
+let test_weight_to_correct () =
+    let tower = Tower.parse test_input in
+    Alcotest.(check int) "" (Tower.find_weight_to_correct tower) 60;
+    Alcotest.(check int) "" ((Tower.parse puzzle_input) |> Tower.find_weight_to_correct) 2310
+
+let test_set_star2 = [
+    "Weight to correct", `Quick, test_weight_to_correct;
+]

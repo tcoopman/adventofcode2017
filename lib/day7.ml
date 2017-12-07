@@ -87,4 +87,34 @@ module Tower = struct
             build_tower names_to_build to_build StringMap.empty
         | None ->
             {name = "incorrect input"; weight = min_int; children = []}
+
+    let rec sum (t: t) =
+        t.weight + (List.fold_left (fun acc program -> acc + (sum program)) 0 t.children)
+
+    let rec find_weight_to_correct (bottom: t) =
+        let module IntMap = Map.Make(struct type t = int let compare = compare end) in
+        let counted children = List.fold_left (fun acc e -> 
+            match IntMap.find_opt (sum e) acc with
+            | None -> IntMap.add (sum e) [e] acc
+            | Some x -> IntMap.add (sum e) (e::x) acc
+        ) IntMap.empty children
+        in
+        let difference = 
+            let counts = IntMap.fold (fun _key el acc -> (List.hd el |> sum) :: acc) (counted bottom.children) [] in
+            let min = List.fold_left min max_int counts in
+            let max = List.fold_left max min_int counts in
+            (max - min)
+        in
+        let rec incorrect_balanced (item:t) =
+            let counted = counted item.children in
+            let incorrect_sub_tree = IntMap.find_first_opt (fun key -> 
+                (IntMap.find key counted) |> List.length = 1
+            ) counted in
+            match incorrect_sub_tree with
+            | None -> 
+                item.weight - difference
+            | Some (_, t) -> 
+                incorrect_balanced (List.hd t)
+        in
+        incorrect_balanced bottom
 end
