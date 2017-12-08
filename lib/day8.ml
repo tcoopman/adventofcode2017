@@ -85,4 +85,13 @@ module Cpu = struct
 
     let largest cpu =
         StringMap.fold (fun _key v max -> if v > max then v else max) cpu min_int 
+
+    let largestDuringExecution instructions =
+        List.fold_left (fun (cpu, max) instruction -> 
+            let cpu = executeInstruction cpu instruction in
+            let largest = largest cpu in
+            let max = if largest > max then largest else max in
+            (cpu, max)
+        ) (StringMap.empty, min_int) instructions
+        |> snd
 end

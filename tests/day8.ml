@@ -1034,8 +1034,18 @@ let test_largest_value_in_register input output () =
 let test_set_star1 = [
   "Parse instruction", `Quick, test_parse_instruction;
   "Largest value in register", `Quick, (test_largest_value_in_register test_input 1);
-  "Largest value in register", `Quick, (test_largest_value_in_register puzzle_input 1);
+  "Largest value in register", `Quick, (test_largest_value_in_register puzzle_input 5946);
 ]
 
+let test_largest_value_during input output () =
+    match parse input with
+    | None -> Alcotest.fail "Could not parse"
+    | Some instructions ->
+        Alcotest.(check int) "" (
+            instructions
+            |> Cpu.largestDuringExecution) output
+
 let test_set_star2 = [
+  "Largest value in during execution", `Quick, (test_largest_value_during test_input 10);
+  "Largest value in during execution", `Quick, (test_largest_value_during puzzle_input 6026);
 ]
