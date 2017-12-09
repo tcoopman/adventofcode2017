@@ -4,6 +4,7 @@ type group = {
     parent: group option;
     score: int;
     children: group list;
+    garbage: int;
 }
 
 let parse input =
@@ -11,7 +12,7 @@ let parse input =
     let rec parse_stream state group chars =
         match (state, group, chars) with 
         | (Start, None, '{':: tl) ->
-            let group = Some {parent = None; score = 1; children = []} in
+            let group = Some {parent = None; score = 1; garbage = 0; children = []} in
             parse_stream Group group tl
 
         | (Group, Some g, '}':: []) ->
@@ -21,7 +22,7 @@ let parse input =
             end
 
         | (Group, Some g, '{':: tl) ->
-            let new_group = {parent = Some g; score = g.score + 1; children = []} in
+            let new_group = {parent = Some g; score = g.score + 1; garbage = 0; children = []} in
             parse_stream Group (Some new_group) tl
 
         | (Group, Some g, '}':: tl) ->
@@ -44,8 +45,9 @@ let parse input =
         | (Garbage, _, '!'::tl) ->
             parse_stream Ignore group tl
 
-        | (Garbage, _, _::tl) ->
-            parse_stream Garbage group tl
+        | (Garbage, Some g, _::tl) ->
+            let new_group = {g with garbage = g.garbage + 1} in
+            parse_stream Garbage (Some new_group) tl
 
         | (Ignore, _, _::tl) ->
             parse_stream Garbage group tl
@@ -57,3 +59,6 @@ let parse input =
 
 let rec total_score group =
     group.score + (List.fold_left (fun acc g -> acc + total_score g) 0 group.children) 
+
+let rec total_garbage_score group =
+    group.garbage + (List.fold_left (fun acc g -> acc + total_garbage_score g) 0 group.children) 
