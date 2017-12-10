@@ -7,15 +7,15 @@ let print_t l =
     Printf.printf "\n";
     l *)
 
-let partition_map position length l =
+let reverse_part position length l =
     let arr = Array.of_list l in
     let circular_i i = i mod (Array.length arr) in
     let rec select_indices arr position length indices =
-        if length > 0 then
+        match length with
+        | 0 -> indices
+        | _ -> 
             let p = circular_i position in
             select_indices arr (position + 1) (length -1) ((p, arr.(p)) :: indices)
-        else
-            indices
     in
     select_indices arr position length []
     |> CCList.split
@@ -30,7 +30,7 @@ let hash list_length lengths =
         match lengths with
         | [] -> list
         | length :: tl ->
-            let list = partition_map position length list in
+            let list = reverse_part position length list in
             hash' list tl (position + length + skip_size) (skip_size + 1)
     in
     hash' list lengths 0 0
