@@ -18,4 +18,6 @@ let () =
     "Star 16", Day8.test_set_star2;
     "Star 17", Day9.test_set_star1;
     "Star 18", Day9.test_set_star2;
+    "Star 19", Day10.test_set_star1;
+    "Star 20", Day10.test_set_star2;
 ]
